@@ -1,7 +1,6 @@
 # from django.shortcuts import render
 import os
 from django.shortcuts import render_to_response
-from cassandra.cluster import Cluster
 # from django.template import RequestContext
 
 import tweepy
@@ -21,16 +20,6 @@ access_token_secret= "t4D3lnP1cjmqYJLMsE08s8sw0zFn15WUUyjRuXk18MRiY"
 
 
 def index(request):
-    # cluster = Cluster()
-    # session = cluster.connect('demo')
-    #
-    # session.execute("""
-    # insert into users (lastname, age, city, email, firstname) values ('Jones', 35, 'Austin', 'bob@example.com', 'Bob')
-    # """)
-    #
-    # result = session.execute("select * from users where lastname='Jones' ")[0]
-    # print result.firstname, result.age
-
     # auth = OAuthHandler(consumer_key, consumer_secret)
     # auth.set_access_token(access_token, access_token_secret)
     # api = tweepy.API(auth)
