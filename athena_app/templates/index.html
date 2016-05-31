@@ -9,12 +9,11 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Latest Histories</h4>
-                    <p class="category">Histories have content and date limits</p>
+                    <h4 class="title">Latest Harvests</h4>
+                    <p class="category">Harvests have content and date limits</p>
                 </div>
                 <div class="content">
                     <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-
                     <div class="footer">
                         <div class="legend">
                             <i class="fa fa-circle text-info"></i> Done
@@ -22,7 +21,7 @@
                         </div>
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-clock-o"></i> Last history recovered on...
+                            <i class="fa fa-clock-o"></i> Last harvest recovered on...
                         </div>
                     </div>
                 </div>
@@ -32,11 +31,18 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">Create new history</h4>
-                    <p class="category">Due to rate limits imposed by Twitter, histories may take a long while to complete. You will be notified when a history is fully Harvested.</p>
+                    <h4 class="title">Create new harvest</h4>
+                    <p class="category">Due to rate limits imposed by Twitter, harvests may take a long time. You will be notified when Harvest is done.</p>
                 </div>
                 <div class="content">
-                    <div id="chartHours" class="ct-chart"></div>
+                    <div id="chartHours" class="ct-chart">
+                        <form action="" method="post" class="form-group">{% csrf_token %}
+                          {{ form.as_p }}
+                          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                            <i class="mdi-content-send right"></i>
+                          </button>
+                        </form>
+                    </div>
                     <div class="footer">
                         <!-- <div class="legend">
                             <i class="fa fa-circle text-info"></i> Open
