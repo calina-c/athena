@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 import os
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 # from django.template import RequestContext
 
 import tweepy
@@ -8,8 +8,9 @@ from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
 from django.http import HttpResponse
+from athena_app.harvest_manager import get_harvests, delete_harvest
 
-from django.views.generic.edit import FormView
+from django.views.generic.edit import FormView, DeleteView
 from athena_app.forms import HarvestForm
 
 consumer_key="tARl2kr5TrsirivWX2VDv5SZo"
@@ -34,8 +35,18 @@ def index(request):
 class HarvestView(FormView):
     template_name = 'index.html'
     form_class = HarvestForm
-    success_url = '/app/'
+    success_url = '/app/harvest/'
+
+    def get_context_data(self, **kwargs):
+        context = super(HarvestView, self).get_context_data(**kwargs)
+        context['harvests'] = get_harvests()
+        return context
 
     def form_valid(self, form):
         form.create_harvest()
         return super(HarvestView, self).form_valid(form)
+
+
+def harvest_delete(request, uuid):
+    delete_harvest(uuid)
+    return redirect('/app/harvest/')

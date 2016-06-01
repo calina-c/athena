@@ -6,29 +6,40 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-4">
-            <div class="card">
+        <div class="col-md-6">
+            <div class="card ">
                 <div class="header">
                     <h4 class="title">Latest Harvests</h4>
-                    <p class="category">Harvests have content and date limits</p>
                 </div>
                 <div class="content">
-                    <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
+                    <div class="table-full-width">
+                        <table class="table">
+                            <tbody>
+                                {% for harvest in harvests %}
+                                <tr>
+                                    <td><strong>{{ harvest.hashtag}}</strong> from {{ harvest.start_date|date:"d M Y" }} to {{ harvest.end_date|date:"d M Y" }} </td>
+                                    <td class="td-actions text-right">
+                                        <a title="Remove" class="btn btn-danger btn-simple btn-xs" href="/app/harvest/delete/{{harvest.uuid}}">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
                     <div class="footer">
-                        <div class="legend">
-                            <i class="fa fa-circle text-info"></i> Done
-                            <i class="fa fa-circle text-warning"></i> In progress
-                        </div>
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-clock-o"></i> Last harvest recovered on...
+                            <i class="fa fa-history"></i> Some harvests are in progress.
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="card">
                 <div class="header">
                     <h4 class="title">Create new harvest</h4>
