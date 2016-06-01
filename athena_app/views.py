@@ -1,6 +1,6 @@
 # from django.shortcuts import render
 import os
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, render, redirect
 # from django.template import RequestContext
 
 from django.http import HttpResponse
@@ -9,8 +9,13 @@ from athena_app.harvest_manager import get_harvests, delete_harvest
 from django.views.generic.edit import FormView, DeleteView
 from athena_app.forms import HarvestForm
 
+
 def index(request):
     return render_to_response('base.html')
+
+
+def enhance_index(request):
+    return render_to_response('enhance.html')
 
 
 class HarvestView(FormView):

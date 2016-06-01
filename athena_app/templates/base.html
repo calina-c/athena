@@ -49,19 +49,19 @@
             </div>
 
             <ul class="nav">
-                <li class="active">
+                <li {% if 'harvest' in request.path %} class="active" {% endif %}>
                     <a href="/app/harvest">
-                        <i class="pe-7s-piggy"></i>
+                        <i class="pe-7s-leaf"></i>
                         <p>Harvest</p>
                     </a>
                 </li>
-                <!-- <li>
-                    <a href="user.html">
-                        <i class="pe-7s-user"></i>
-                        <p>User Profile</p>
+                <li {% if 'enhance' in request.path %} class="active" {% endif %}>
+                    <a href="/app/enhance">
+                        <i class="pe-7s-diamond"></i>
+                        <p>Enhance</p>
                     </a>
                 </li>
-                <li>
+                <!-- <li>
                     <a href="table.html">
                         <i class="pe-7s-note2"></i>
                         <p>Table List</p>
