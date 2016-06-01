@@ -3,12 +3,18 @@ from athena_app.tasks import harvest_task
 
 
 class HarvestForm(forms.Form):
-    hashtag = forms.CharField();
-    start_date = forms.DateField(widget=forms.TextInput(
-        attrs={'class':'datepicker'})
+    hashtag = forms.CharField(label='hashtag or content');
+    start_date = forms.DateField(
+        label='Tweet from start date',
+        widget=forms.TextInput(
+            attrs={'class':'datepicker'}
+        )
     )
-    end_date = forms.DateField(widget=forms.TextInput(
-        attrs={'class':'datepicker'})
+    end_date = forms.DateField(
+        label='Tweets through date',
+        widget=forms.TextInput(
+            attrs={'class':'datepicker'}
+        )
     )
 
     def create_harvest(self):
