@@ -27,7 +27,7 @@ def create_harvest(hashtag, start_date, end_date):
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
     api = tweepy.API(auth, wait_on_rate_limit=True)
-    # TODO: add until
+    # TODO: verify until works!!
     tweets = tweepy.Cursor(api.search, q=hashtag, since=start_date, until=end_date, lang='en').items()
 
     for tweet in tweets:
