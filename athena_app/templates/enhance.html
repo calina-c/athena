@@ -6,15 +6,40 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div class="col-md-3"></div>
         <div class="col-md-6">
             <div class="card ">
                 <div class="header">
-                    <h4 class="title">work in progress...</h4>
+                    <h4 class="title">Choose a harvest:</h4>
                 </div>
                 <div class="content">
+                    <div class="table-full-width">
+                        <table class="table">
+                            <tbody>
+                                {% for harvest in harvests %}
+                                <tr>
+                                    <td><strong>{{ harvest.hashtag}}</strong> from {{ harvest.start_date|date:"d M Y" }} to {{ harvest.end_date|date:"d M Y" }} </td>
+                                    <td class="td-actions text-right">
+                                        <a title="Remove" class="btn btn-info btn-simple" href="/app/enhance/h/{{harvest.uuid}}">
+                                            <i class="fa fa-bolt"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="footer">
+                        <hr>
+                        <div class="stats">
+                            <i class="fa fa-history"></i> Some harvests are in progress.
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 
