@@ -7,7 +7,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <div class="card ">
+            <div class="card">
                 <div class="header">
                     <h4 class="title"><strong>{{ harvest.hashtag}}</strong> from {{ harvest.start_date|date:"d M Y" }} to {{ harvest.end_date|date:"d M Y" }} </h4>
                     <p class="category">Harvest Enhancement Results</p>
@@ -16,6 +16,19 @@
             </div>
         </div>
     </div>
+
+    <div class="col-md-5">
+        <div class="card ">
+            <div class="header">
+                <h5 class="title"><strong> Associated hashtags: </strong>
+                {% for hashtag in vocabulary %}
+                    <div class="btn btn-info btn-small">{{ hashtag }}</div>
+                {% endfor %}
+            </div>
+            <div class="content">
+        </div>
+    </div>
+    <div class="col-md-7"></div>
 </div>
 
 {% endblock content %}
