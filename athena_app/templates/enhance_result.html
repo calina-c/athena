@@ -17,18 +17,50 @@
         </div>
     </div>
 
-    <div class="col-md-5">
+    <div class="col-md-4">
         <div class="card ">
             <div class="header">
-                <h5 class="title"><strong> Associated hashtags: </strong>
+                <h5 class="title"><strong> Number of tweets: {{ tweet_count }}</strong>
+            </div>
+            <div class="content">
+            </div>
+        </div>
+        <div class="card ">
+            <div class="header">
+                <h5 class="title"><strong> Number of users: {{ users.count }}</strong>
+            </div>
+            <div class="content">
+                Maximum posts per user: {{ users.max_posts_per_user }} <br />
+                Average posts per user: {{ users.avg_posts_per_user }} <br />
+            </div>
+        </div>
+        <div class="card ">
+            <div class="header">
+                <h5 class="title"><strong> Related hashtags: </strong>
+            </div>
+            <div class="content">
                 {% for hashtag in vocabulary %}
                     <div class="btn btn-info btn-small">{{ hashtag }}</div>
                 {% endfor %}
             </div>
-            <div class="content">
         </div>
     </div>
-    <div class="col-md-7"></div>
+    <div class="col-md-8">
+        <div class="card ">
+            <div class="header">
+                <h5 class="title"><strong> Hashtags clusters: </strong>
+            </div>
+            <div class="content">
+            {% for cluster, items in clusters.items %}
+                <div class="well">
+                {% for i, term in items.items %}
+                    <div class="btn btn-success btn-small">{{ term }}</div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}

@@ -1,7 +1,8 @@
+from __future__ import division
 from cassandra.cluster import Cluster
 import uuid
-from sklearn.feature_extraction.text import TfidfVectorizer
-import nltk
+from athena_app.sentiment import get_vocabulary, get_clusters
+import operator
 
 def enhance_h(key):
     cluster = Cluster()
@@ -26,24 +27,28 @@ def enhance_h(key):
     )
 
     tweet_texts = []
+    tweet_users = {}
+
     for tweet in tweets:
+        if tweet.user in tweet_users:
+            tweet_users[tweet.user] += 1
+        else:
+            tweet_users[tweet.user] = 1
         tweet_texts.append(tweet.content)
 
-    # stopwords = nltk.corpus.stopwords.words('english')
+    sorted_users = sorted(tweet_users.items(), key=operator.itemgetter(1))
 
-    vectorizer = TfidfVectorizer(
-        min_df=10,
-        max_df=0.8,
-        sublinear_tf=True,
-        use_idf=True,
-        max_features=25,
-        token_pattern='#[a-zA-Z0-9][a-zA-Z0-9]*'
-    )
-
-    matrix = vectorizer.fit_transform(tweet_texts).toarray()
-    vocabulary = vectorizer.get_feature_names()
+    tweet_count = len(tweet_texts)
+    user_count = len(tweet_users)
 
     return {
         'harvest': harvest,
-        'vocabulary': vocabulary
+        'tweet_count': tweet_count,
+        'vocabulary': get_vocabulary(tweet_texts),
+        'clusters': get_clusters(tweet_texts),
+        'users': {
+            'count': user_count,
+            'max_posts_per_user': sorted_users[-1][1],
+            'avg_posts_per_user': tweet_count / user_count
+        },
     }
