@@ -11,3 +11,5 @@ Approach for Tweet Harvesting, Enhancement, Analysis and Normalisation
 ```CREATE TABLE tweet (   twitterId text,   user text,   content text,   date timestamp,   retweets int,   likes int, hashtags list<text>, history uuid, PRIMARY KEY (twitterId));```
 
 ```CREATE TABLE harvest ( uuid uuid, start_date timestamp, end_date timestamp, hashtag text, done boolean, PRIMARY KEY(uuid));```
+
+```CREATE TABLE normal (uuid uuid, content text, PRIMARY KEY(uuid));```

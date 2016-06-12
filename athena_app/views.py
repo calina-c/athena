@@ -9,7 +9,7 @@ from athena_app.enhancement_manager import enhance_h
 
 from django.views.generic.edit import FormView, DeleteView
 from django.views.generic.base import View
-from athena_app.forms import HarvestForm
+from athena_app.forms import HarvestForm, NormaliseForm
 
 
 def index(request):
@@ -45,3 +45,23 @@ class HarvestView(FormView):
 def harvest_delete(request, uuid):
     delete_harvest(uuid)
     return redirect('/app/harvest/')
+
+
+def harvest_delete(request, uuid):
+    delete_harvest(uuid)
+    return redirect('/app/harvest/')
+
+
+class NormaliseView(FormView):
+    template_name = 'normalise.html'
+    form_class = NormaliseForm
+    success_url = '/app/normalise/'
+
+    def get_context_data(self, **kwargs):
+        context = super(NormaliseView, self).get_context_data(**kwargs)
+        context['harvests'] = get_harvests()
+        return context
+
+    def form_valid(self, form):
+        form.normalise_harvest()
+        return super(NormaliseView, self).form_valid(form)

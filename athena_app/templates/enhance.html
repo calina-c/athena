@@ -17,14 +17,16 @@
                         <table class="table">
                             <tbody>
                                 {% for harvest in harvests %}
+                                {% if harvest.done and not harvest.normalised %}
                                 <tr>
                                     <td><strong>{{ harvest.hashtag}}</strong> from {{ harvest.start_date|date:"d M Y" }} to {{ harvest.end_date|date:"d M Y" }} </td>
                                     <td class="td-actions text-right">
-                                        <a title="Remove" class="btn btn-info btn-simple" href="/app/enhance/h/{{harvest.uuid}}">
+                                        <a title="Remove" class="btn btn-info btn-simple btn-large" href="/app/enhance/h/{{harvest.uuid}}">
                                             <i class="fa fa-bolt"></i>
                                         </a>
                                     </td>
                                 </tr>
+                                {% endif %}
                                 {% endfor %}
                             </tbody>
                         </table>

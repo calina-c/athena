@@ -17,11 +17,22 @@
                             <tbody>
                                 {% for harvest in harvests %}
                                 <tr>
-                                    <td><strong>{{ harvest.hashtag}}</strong> from {{ harvest.start_date|date:"d M Y" }} to {{ harvest.end_date|date:"d M Y" }} </td>
+                                    <td>
+                                        <strong>{{ harvest.hashtag}} </strong> from {{ harvest.start_date|date:"d M Y" }} to {{ harvest.end_date|date:"d M Y" }}
+                                        {% if harvest.normalised %}
+                                        <button class="pe-7s-bandaid btn btn-primary btn-xs"> Normalised </button>
+                                        {% endif %}
+                                    </td>
                                     <td class="td-actions text-right">
-                                        <a title="Remove" class="btn btn-danger btn-simple btn-xs" href="/app/harvest/delete/{{harvest.uuid}}">
-                                            <i class="fa fa-times"></i>
-                                        </a>
+                                        {% if not harvest.done %}
+                                            <a title="Waiting" class="btn btn-warning btn-simple btn-large">
+                                                <i class="fa fa-clock-o"></i>
+                                            </a>
+                                        {% else %}
+                                            <a title="Remove" class="btn btn-danger btn-simple btn-large" href="/app/harvest/delete/{{harvest.uuid}}">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {% endfor %}
@@ -32,7 +43,7 @@
                     <div class="footer">
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-history"></i> Some harvests are in progress.
+                            <i class="fa fa-history"></i> Some harvests may be in progress.
                         </div>
                     </div>
                 </div>

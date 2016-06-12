@@ -61,6 +61,12 @@
                         <p>Enhance</p>
                     </a>
                 </li>
+                <li {% if 'normalise' in request.path %} class="active" {% endif %}>
+                    <a href="/app/normalise">
+                        <i class="pe-7s-bandaid"></i>
+                        <p>Normalise</p>
+                    </a>
+                </li>
                 <!-- <li>
                     <a href="table.html">
                         <i class="pe-7s-note2"></i>
