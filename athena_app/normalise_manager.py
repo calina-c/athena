@@ -38,7 +38,7 @@ def normalise(key):
 
     session.execute(
         """
-        insert into normal (uuid, content) values (%s, %s)
+        insert into normal (uuid, name, content) values (%s, %s, %s)
         """,
-        (key, json.dumps(normalised_harvest))
+        (key, r.hashtag + ' one day normalisation', json.dumps(normalised_harvest))
     )

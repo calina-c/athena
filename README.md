@@ -12,4 +12,4 @@ Approach for Tweet Harvesting, Enhancement, Analysis and Normalisation
 
 ```CREATE TABLE harvest ( uuid uuid, start_date timestamp, end_date timestamp, hashtag text, done boolean, PRIMARY KEY(uuid));```
 
-```CREATE TABLE normal (uuid uuid, content text, PRIMARY KEY(uuid));```
+```CREATE TABLE normal (uuid uuid, name text, content text, PRIMARY KEY(uuid));```
