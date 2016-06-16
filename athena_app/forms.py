@@ -1,6 +1,6 @@
 from django import forms
 from athena_app.tasks import harvest_task
-from athena_app.harvest_manager import get_harvests
+from athena_app.harvest_manager import get_harvests, get_normal_harvests
 from athena_app.normalise_manager import normalise
 from datetime import datetime
 
@@ -39,8 +39,22 @@ def get_normalisable_harvests():
         for x in all_harvests if x.done
     ]
 
+def get_normalised_harvests():
+    all_harvests = list(get_normal_harvests())
+    return [
+        (
+            x.uuid,
+            x.name
+        )
+        for x in all_harvests
+    ]
+
 class NormaliseForm(forms.Form):
     harvest = forms.ChoiceField(choices=get_normalisable_harvests())
 
     def normalise_harvest(self):
         normalise(self.cleaned_data['harvest'])
+
+class AnalyseForm(forms.Form):
+    harvest1 = forms.ChoiceField(choices=get_normalised_harvests())
+    harvest2 = forms.ChoiceField(choices=get_normalised_harvests())

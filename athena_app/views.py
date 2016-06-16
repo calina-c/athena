@@ -4,12 +4,13 @@ from django.shortcuts import render_to_response, render, redirect
 # from django.template import RequestContext
 
 from django.http import HttpResponse
-from athena_app.harvest_manager import get_harvests, delete_harvest
+from athena_app.harvest_manager import get_harvests, delete_harvest, get_normal_harvests
 from athena_app.enhancement_manager import enhance_h
 
 from django.views.generic.edit import FormView, DeleteView
 from django.views.generic.base import View
-from athena_app.forms import HarvestForm, NormaliseForm
+from athena_app.forms import HarvestForm, NormaliseForm, AnalyseForm
+from django.http import HttpResponseRedirect
 
 
 def index(request):
@@ -65,3 +66,25 @@ class NormaliseView(FormView):
     def form_valid(self, form):
         form.normalise_harvest()
         return super(NormaliseView, self).form_valid(form)
+
+class AnalyseView(FormView):
+    template_name = 'analyse.html'
+    form_class = AnalyseForm
+
+    def get_context_data(self, **kwargs):
+        context = super(AnalyseView, self).get_context_data(**kwargs)
+        context['harvests'] = get_normal_harvests()
+        print context['harvests']
+        return context
+
+    def get_success_url(self):
+        harvest1 = self.request.POST['harvest1']
+        harvest2 = self.request.POST['harvest2']
+        return '/app/analyse/h/' + harvest1 + '/h2/' + harvest2
+
+def analyse_harvests(request, uuid1, uuid2):
+    return render_to_response('analyse_result.html', {
+        # TODO: change context vars
+        'harvest1': uuid1,
+        'harvest2': uuid2
+    })

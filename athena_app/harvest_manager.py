@@ -58,6 +58,19 @@ def get_harvests():
     return harvests
 
 
+def get_normal_harvests():
+    cluster = Cluster()
+    session = cluster.connect('demo')
+
+    harvests = session.execute(
+        """
+        select * from normal
+        """
+    )
+
+    return harvests
+
+
 def delete_harvest(key):
     cluster = Cluster()
     session = cluster.connect('demo')
