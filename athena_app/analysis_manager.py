@@ -47,12 +47,10 @@ def analyse_h(uuid1, uuid2):
     h1only_users = [user for user in h1_users if user not in common_users]
     h2only_users = [user for user in h2_users if user not in common_users]
 
-    total = len(h1only_users) + len(h2only_users) + len(common_users)
-    proportionh1o = len(h1only_users) / total
-    proportionh2o = len(h2only_users) / total
-    proportioncomm = len(common_users) / total
+    proportionh1o = len(h1only_users)
+    proportionh2o = len(h2only_users)
+    proportioncomm = len(common_users)
     proportions = (proportionh1o, proportionh2o, proportioncomm)
-    # TODO: proportions chart
 
     return {
         'common_vocabulary': set(vocab1) & set(vocab2),

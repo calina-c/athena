@@ -2,6 +2,31 @@
 
 {% load staticfiles %}
 
+{% block charts %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Norm. Harvest', 'Number of posts'],
+      ["{{ h1 }}",     {{ proportions.0 }}],
+      ["{{ h2 }}",     {{ proportions.1 }}],
+      ["common",     {{ proportions.2 }}],
+    ]);
+
+    var options = {
+    //   title: 'Post proportion'
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+  }
+</script>
+{% endblock %}
+
 {% block content %}
 
 <div class="container-fluid">
@@ -69,13 +94,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h5 class="title"><strong>User proportion</strong></h5>
+                    <h5 class="title"><strong>Post proportion</strong></h5>
                 </div>
                 <div class="content">
                     <ul>
                     <li>{{ h1 }} only: {{ proportions.0 }} </li>
                     <li>{{ h2 }} only: {{ proportions.1 }} </li>
                     <li>common: {{ proportions.2 }} </li>
+                    </ul>
+
+                    <div id="piechart"></div>
                 </div>
             </div>
         </div>
