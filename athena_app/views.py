@@ -6,6 +6,7 @@ from django.shortcuts import render_to_response, render, redirect
 from django.http import HttpResponse
 from athena_app.harvest_manager import get_harvests, delete_harvest, get_normal_harvests
 from athena_app.enhancement_manager import enhance_h
+from athena_app.analysis_manager import analyse_h
 
 from django.views.generic.edit import FormView, DeleteView
 from django.views.generic.base import View
@@ -83,8 +84,5 @@ class AnalyseView(FormView):
         return '/app/analyse/h/' + harvest1 + '/h2/' + harvest2
 
 def analyse_harvests(request, uuid1, uuid2):
-    return render_to_response('analyse_result.html', {
-        # TODO: change context vars
-        'harvest1': uuid1,
-        'harvest2': uuid2
-    })
+    results = analyse_h(uuid1, uuid2)
+    return render_to_response('analyse_result.html', results)

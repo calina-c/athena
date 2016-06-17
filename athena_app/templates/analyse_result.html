@@ -9,10 +9,74 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="header">
-                    <h4 class="title">TODO</h4>
-                    <p class="category">UUID1: {{uuid1}}, UUID2: {{uuid2}}</p>
+                    <h3 class="title"><strong>Comparative harvest analysis</strong></h3>
+                </div>
+                <div class="content"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title"><strong>{{ h1 }}</strong></h4>
+                </div>
+                <div class="content"></div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="header">
+                    <h4 class="title"><strong>{{ h2 }}</strong></h4>
+                </div>
+                <div class="content"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h5 class="title"><strong>Common vocabulary</strong></h5>
                 </div>
                 <div class="content">
+                    {% for hashtag in common_vocabulary %}
+                        <div class="btn btn-info btn-xl">{{ hashtag }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h5 class="title"><strong>Common users</strong></h5>
+                </div>
+                <div class="content">
+                    {% for user in common_users %}
+                        <div class="btn btn-info btn-xl">@{{ user }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h5 class="title"><strong>User proportion</strong></h5>
+                </div>
+                <div class="content">
+                    <ul>
+                    <li>{{ h1 }} only: {{ proportions.0 }} </li>
+                    <li>{{ h2 }} only: {{ proportions.1 }} </li>
+                    <li>common: {{ proportions.2 }} </li>
+                </div>
             </div>
         </div>
     </div>

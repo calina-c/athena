@@ -2,6 +2,7 @@ from __future__ import division
 from cassandra.cluster import Cluster
 import uuid
 from athena_app.sentiment import get_vocabulary, get_clusters
+import plfit
 import operator
 
 def enhance_h(key):
@@ -41,6 +42,9 @@ def enhance_h(key):
     tweet_count = len(tweet_texts)
     user_count = len(tweet_users)
 
+    user_tweet_numbers = [item[1] for item in sorted_users]
+
+    p = plfit.plfit(user_tweet_numbers)
     return {
         'harvest': harvest,
         'tweet_count': tweet_count,
@@ -51,4 +55,5 @@ def enhance_h(key):
             'max_posts_per_user': sorted_users[-1][1],
             'avg_posts_per_user': tweet_count / user_count
         },
+        "power_fit": (p._xmin, p._alpha)
     }
