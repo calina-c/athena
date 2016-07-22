@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/calina-c/athena.png?label=ready&title=Ready)](https://waffle.io/calina-c/athena)
 # ATHENA
 Approach for Tweet Harvesting, Enhancement, Analysis and Normalisation
 
